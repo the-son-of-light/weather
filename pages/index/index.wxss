@@ -1,0 +1,103 @@
+/**index.wxss**/
+page { 
+  background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557740254908&di=f5ba6d955380ef412af845ec1f4dfaa9&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180804%2F34a4974f9e8646a98c34362d98b9e0f3.gif'); 
+  margin: 0px; 
+  /*下面的是关键的设置100%显示*/ 
+  background-size: 100% 100%; 
+  background-attachment:fixed;
+} 
+ .pageHeight{
+   height: 100vh;
+ }
+.current{
+  padding-left: 5rpx;
+  margin-top: 30rpx;
+  padding-bottom: 4rpx;
+  border-bottom: 1rpx solid #fff;
+}
+
+.nowWeather{
+  width: 100%;
+  height: 260rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.now-temp{
+  font-size: 100rpx;
+  padding-right: 20rpx;
+  border-right: 1px solid #fff;
+}
+
+.temp-pic{
+  display:flex;
+  flex-direction: column;
+  margin-left: 20rpx;
+  font-size: 32rpx;
+}
+
+.temp-pic image{
+  width: 60rpx;
+  height: 60rpx;
+}
+
+.current text{
+  font-size: 32rpx;
+  margin-right: 40rpx;
+  margin-top: 30rpx;
+} 
+
+.weather{
+  padding-left: 5rpx;
+  width:100%;
+  height: 60rpx;
+  line-height: 60rpx;
+  font-size: 32rpx;
+  background: #cac5c0;
+  opacity: .8;
+  color: #fff;
+}
+
+.finger-temp{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 4rpx dotted #fff;
+  margin-top: 15rpx;
+}
+
+.finger-temp image{
+  width: 60rpx;
+  height: 60rpx;
+  margin-left: 20rpx;
+}
+
+.finger-set{
+  padding-left: 5rpx;
+  margin-right: 20rpx;
+  padding-bottom: 4rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-size: 28rpx;
+}
+
+.des{
+  display: flex;
+  flex-direction: column;
+  font-size: 28rpx;
+}
+
+.nextWeather{
+  margin-top: 30rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 5rpx 20rpx 5rpx;
+}
+
+.nextWeather image{
+  width: 70rpx;
+  height: 60rpx;
+}

@@ -1,0 +1,45 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/logs/logs",
+    "pages/city/city",
+    "pages/aboutMe/aboutMe"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#ece5dc",
+    "navigationBarTitleText": "天气预报",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color":"#000",
+    "selectedColor": "#1296db",
+    "backgroundColor": "#ece5dc",
+    "list": [ 
+      {
+        "pagePath": "pages/index/index",
+        "text": "当前天气",
+        "iconPath": "./images/unMySun.png",
+        "selectedIconPath": "./images/mySun.png"
+      },
+      {
+        "pagePath": "pages/city/city",
+        "text": "设置城市",
+        "iconPath": "./images/uncity.png",
+        "selectedIconPath": "./images/city.png"
+      },
+      {
+        "pagePath":"pages/aboutMe/aboutMe",
+        "text":"关于我",
+        "iconPath":"./images/unaboutMe.png",
+        "selectedIconPath":"./images/aboutMe.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "请点击确定"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}
