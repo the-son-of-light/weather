@@ -1,114 +1,136 @@
-// 通过百度地图获取天气
-let bmap = require('../../libs/bmap-wx.js');
-let utils = require('../../utils/util');
-
+let bmap = require('../../libs/bmap-wx');//引用百度地图小程序API
+let wxMarkerData = [];	//定位成功回调对象
+let api = require('../../utils/api');//引用公共接口
+let util = require('../../utils/util')//引用获取时间
 Page({
-	data: {
-		allData:[],
-		weatherData: '',
-		currentCity:'',
-		currentData:'',
-		weather:'',
-		temperature:'',
-		nowTemperture:'',
-		tempPic:'',
-		pic:[],
-		weatherDes:[],
-		finger:[],
-		fingerPic:[
-		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557805211708&di=afbcd1fbf0287c41ab1890e0874b93fb&imgtype=0&src=http%3A%2F%2Fimages.669pic.com%2Felement_pic%2F7%2F71%2F47%2F83%2Fed0965ca72209504ba9edd066a683050.jpg',
-		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557805174314&di=286b252a8845c098f1006d164f98da33&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F01%2F18%2F48%2F590501c8ad04f_610.jpg',
-		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557805285343&di=d8c0b458fbc5dcb3b69a483659ad5d77&imgtype=0&src=http%3A%2F%2Fimages.669pic.com%2Felement_pic%2F97%2F56%2F56%2F97%2F55c21592fa173170157151d2cb252b1f.jpg',
-		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557805325705&di=924564518b71744c63875aad0ecb8fa9&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F01%2F43%2F85%2F59399ce26e45f_610.jpg',
-		'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557805360804&di=d8f70e629f09b15f7e205193ac24409d&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F40%2F04%2F59c2d4fb8593b_610.jpg'
-		]
-	},
-	onShareAppMessage: function() {
-    let users = wx.getStorageSync('user');
-    if (data.from === 'button') {}
-    return {
-      title: '转发',
-      path: '/pages/index/index',
-      success: success
-    }
-	},
-  	onLoad: function () {
-		let city = getApp().globalData.showDialog;
-		this.setData({
-			currentCity:city
-		})
-		console.log(city)
-    	let TIME = utils.formatTime(new Date());
-    	let that = this;
-    	// 新建百度地图对象 
-    	let BMap = new bmap.BMapWX({
-     		 ak: 'VilotzCpuWGy7XGOeU0P6iKbb2YotcPY'
-    	});
-		let fail = function (data) {
-		console.log(data)
-		};
-		let success = function (data) {
-				let allData = that.data.allData;
-				allData.push(data);
-				that.setData({
-					allData:allData
-				})
-				console.log(allData.length)
-				console.log(that.data.allData)
-				for(let i = 0;i < allData.length;i ++){
-					let weatherData = allData[i].currentWeather[i].currentCity;
-					let currentData = allData[i].originalData.date;
-					that.setData({
-						currentCity:weatherData,
-						currentData:currentData
-					})
-					console.log(weatherData)
-				}
 
-			let weatherData = data.currentWeather[0];
-			let weatherDesc = data.originalData;
-			let tempPic = weatherDesc.results[0];
-			let tempImg = tempPic.weather_data;
-			if(TIME > "18:00"){
-				that.setData({
-				tempPic:tempImg[0].nightPictureUrl
-				})
-			}else{
-				that.setData({
-				tempPic:tempImg[0].dayPictureUrl
-				})
+	/**
+	 * 页面的初始数据
+	 */
+	data: {
+		currentCity:'',
+		currentDate:'',
+		nowTemperture:'',
+		weather:'',
+		low:'',
+		high:'',
+		prompt:'',
+		weatherDes:[]
+	},
+  
+	/**
+	 * 生命周期函数--监听页面加载
+	 */
+	onLoad: function (options) {		
+		// 获取当前的地理位置
+		let that = this;
+		    // 新建bmap对象 
+		let BMap = new bmap.BMapWX({ 
+			ak: 'VilotzCpuWGy7XGOeU0P6iKbb2YotcPY'
+		}); 
+		let fail = function(data) { 
+			console.log(data);
+		}; 
+		let success = function(data) { 
+			//返回数据内，已经包含经纬度
+			console.log(data);
+			//使用wxMarkerData获取数据
+			wxMarkerData = data.wxMarkerData;  
+			// 获取当前时间
+			let TIME = util.formatTime(new Date());
+			//把所有数据放在初始化data内
+			that.setData({ 
+				currentCity: data.originalData.result.addressComponent.district,
+				currentDate:TIME
+			}); 
+			console.log(that.data.currentCity)
+		} 
+		// 发起regeocoding检索请求 
+		BMap.regeocoding({ 
+			fail: fail, 
+			success: success
+		});     
+		setTimeout(()=>{
+			that.requestData();
+		},500)
+	},
+	// 请求数据
+	requestData(){
+		let _this = this;
+		console.log(_this.data)
+		api.getCityWeather('weather_mini?city='+_this.data.currentCity).then((res)=>{
+			console.log(res.data.data)
+			let weather = res.data.data;
+			_this.setData({
+				nowTemperture:weather.wendu,
+				weather:weather.forecast[0].type,
+				low:weather.forecast[0].low,
+				high:weather.forecast[0].high,
+				weatherDes:weather.forecast,
+				prompt:weather.ganmao
+			})
+			console.log(_this.data.weatherDes)
+			for(let i in _this.data.weatherDes){
+				let subWeather = _this.data.weatherDes[i].date.substring(3,6);
+				let low = _this.data.weatherDes[i].low.substring(3,6);
+				let high = _this.data.weatherDes[i].high.substring(3,6);
+				let weathers = _this.data.weatherDes[i];
+				weathers.date=subWeather;
+				weathers.low=low;
+				weathers.high=high;
 			}
-			let fingerData =  tempPic.index;
-			for(let i in that.data.fingerPic){
-				fingerData[i].name = that.data.fingerPic[i]
-			}
-			for(let i = 0;i < tempImg.length;i ++){
-				if(TIME > "18:00"){
-					that.data.pic.push(tempImg[i].nightPictureUrl)
-				}else{
-					that.data.pic.push(tempImg[i].dayPictureUrl)
-				}
-			}
-			for(let i in that.data.pic){
-				tempImg[i].nowPic = that.data.pic[i]
-			}
-			tempImg[0].date = tempImg[0].date.substring(0,3)
-			that.setData({
-				weatherData: weatherData,
-				currentCity:weatherData.currentCity,
-				currentData:weatherDesc.date,
-				weather:weatherData.weatherDesc,
-				temperature:weatherData.temperature,
-				nowTemperture:weatherData.date.substring(14,17),
-				finger:fingerData,
-				weatherDes:tempImg
-			});
-		// console.log(that.data.allData)	
-    	}
-		// 发起weather请求 
-		BMap.weather({
-		fail: fail,
-		success: success
-		});
-  	}
-})
+			_this.setData({
+				weatherDes:weather.forecast
+			})
+		})
+	},
+	
+	/**
+	 * 生命周期函数--监听页面初次渲染完成
+	 */
+	onReady: function () {
+  
+	},
+  
+	/**
+	 * 生命周期函数--监听页面显示
+	 */
+	onShow: function () {
+  
+	},
+  
+	/**
+	 * 生命周期函数--监听页面隐藏
+	 */
+	onHide: function () {
+  
+	},
+  
+	/**
+	 * 生命周期函数--监听页面卸载
+	 */
+	onUnload: function () {
+  
+	},
+  
+	/**
+	 * 页面相关事件处理函数--监听用户下拉动作
+	 */
+	onPullDownRefresh: function () {
+  
+	},
+  
+	/**
+	 * 页面上拉触底事件的处理函数
+	 */
+	onReachBottom: function () {
+  
+	},
+  
+	/**
+	 * 用户点击右上角分享
+	 */
+	onShareAppMessage: function () {
+  
+	}
+  })

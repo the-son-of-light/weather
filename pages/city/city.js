@@ -14,41 +14,35 @@ Page({
 //   获取输入的城市
 	getCity:function(e){
 		let searchValue = e.detail.value;
-		let chinese =/^[\u4e00-\u9fa5]+$/;
-		if(!chinese.test(searchValue) && searchValue != ''){
-			wx.showModal({
-				title: '提示',
-				content: '请输入汉字！',
-				success: function (res) {
-					if (res.confirm) {
-						console.log('用户点击确定')
-					}else{
-					   console.log('用户点击取消')
-					}
-				}
-			})
-			this.setData({
-				searchValue:''
-      		})
-		}else{
-			this.setData({
-				searchValue:searchValue
-			})
-		}
+		this.setData({
+			searchValue:searchValue
+		})
 	},
   chooseCity:function(){
+	let searchValue = this.data.searchValue;
+    let chinese =/^[\u4e00-\u9fa5]+$/;
+	if(!chinese.test(searchValue) && searchValue != ''){
+		wx.showModal({
+			title: '提示',
+			content: '请输入汉字！',
+			success: function (res) {
+				if (res.confirm) {
+					console.log('用户点击确定');
+				}else{
+					console.log('用户点击取消');
+				}
+			}
+		})
+		this.setData({
+			searchValue:''
+		})
+		return ;
+	}
     let cityName = this.data.searchValue;
-    getApp().globalData.showDialog  = cityName;
-		wx.switchTab({
-      url: '../index/index',
-      success: function(e) {
-        var page = getCurrentPages().pop();
-        if (page == undefined || page == null) return;
-       		page.onLoad();
-      	}
-	})
-		console.log(getApp().globalData.showDialog)
-    console.log(this.data.searchValue)
+		wx.reLaunch({
+			url: '../index/index?cityName='+cityName,
+		});
+    	console.log(this.data.searchValue)
   },
   /**
    * 生命周期函数--监听页面加载
