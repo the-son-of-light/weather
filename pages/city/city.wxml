@@ -1,2 +1,13 @@
 <!--pages/city/city.wxml-->
-<text>pages/city/city.wxml</text>
+<view class="cityBox">
+    <view class="search-city">
+        <input placeholder="请输入城市名称中文" value="{{searchValue}}" bindinput="getCity" auto-focus />
+        <button plain="true" bindtap="chooseCity">确定</button>
+    </view>
+    <view class="hot-city">
+        <view class="city">热门城市</view>
+        <view  class="city-list">
+            <text wx:for="{{hotCity}}" wx:key="{{index}}">{{item}}</text>
+        </view>
+    </view>
+</view>

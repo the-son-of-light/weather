@@ -1,1 +1,54 @@
 /* pages/city/city.wxss */
+.cityBox {
+    padding: 0 5rpx;
+}
+.search-city{
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.search-city input{
+    height: 50rpx;
+    line-height: 50rpx;
+    border:1rpx solid #fff;
+    border-radius: 10rpx;
+    width: 80%;
+    color: #000;
+    font-size: 32rpx;
+}
+
+.search-city button{
+    margin-top: 3rpx;
+    border: none;
+    color: #1296db;
+    font-size: 32rpx;
+    width: 20%;
+    height: 50rpx;
+    line-height: 50rpx;
+    background-color: #ece5dc;
+}
+
+.city{
+    font-size: 24rpx;
+    margin-top: 40rpx;
+    padding-bottom: 10rpx;
+    border-bottom: 1rpx solid #fff;
+}
+
+.city-list{
+    margin-top: 20rpx;
+    font-size: 40rpx;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+
+}
+
+.city-list text{
+    width: 120rpx;
+    height: 60rpx;
+    line-height: 60rpx;
+    text-align: center;
+    margin: 10rpx 30rpx;
+}

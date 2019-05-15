@@ -1,35 +1,45 @@
-<view class='pageHeight' > 
-	<view class="current">
-		<text>当前城市：{{currentCity}}</text>
-		<text>当前日期:{{currentData}}</text>
-	</view>
-	<view class="nowWeather">
-		<view class="now-temp">{{nowTemperture}}</view>
-		<view class="temp-pic">
-			<image src="{{tempPic}}" />
-			<text>{{weather}}</text>
-			<text>{{temperature}}</text>
+<view class="allBox"> 
+	<view class="allData" wx:for="allData" wx:key="{{index}}">
+		<view class="current">
+			<text>城市：{{currentCity}}</text>
+			<text>日期:{{currentData}}</text>
 		</view>
-	</view>
-	<view class="weather">
-		<text>生活指数</text>
-	</view>
-	<view class="finger-temp" wx:for="{{finger}}" wx:key="{{index}}">
-		<view  class="finger-set" >
-			<image src="{{item.name}}" />
-			<text>{{item.tipt}}</text>
+		<view class="nowWeather">
+			<view class="now-temp">{{nowTemperture}}</view>
+			<view class="temp-pic">
+				<image src="{{tempPic}}" />
+				<text>{{weather}}</text>
+				<text>{{temperature}}</text>
+			</view>
 		</view>
-		<view class="des">
-			<text>{{item.zs}}</text>
-			<text>{{item.des}}</text>
+		<view class="life-finger">
+			<view class="weather">
+				<text>生活指数</text>
+			</view>
+			<view class="show-weather-list">
+				<view class="finger-temp" wx:for="{{finger}}" wx:key="{{index}}">
+					<view  class="finger-set" >
+						<image src="{{item.name}}" />
+						<text>{{item.tipt}}</text>
+					</view>
+					<view class="des">
+						<text>{{item.zs}}</text>
+						<text>{{item.des}}</text>
+					</view>
+				</view>
+			</view>
 		</view>
-	</view>
-	<view class="weather">
-		<text>其余天气状况</text>
-	</view>
-	<view wx:for="{{weatherDes}}" wx:key="{{index}}" class="nextWeather">
-		<text>{{item.date}}</text>
-		<image src="{{item.nowPic}}" />		
-		<text>{{item.temperature}}</text>
+		<view class="mod-weather">
+		<view class="weather">
+			<text>其余天气状况</text>
+		</view>
+			<view class="show-next-weather">
+				<view class="nextWeather" wx:for="{{weatherDes}}" wx:key="{{index}}">
+					<text>{{item.date}}</text>
+					<image src="{{item.nowPic}}" />		
+					<text>{{item.temperature}}</text>
+				</view>
+			</view>
+		</view>
 	</view>
 </view>

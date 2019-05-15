@@ -38,7 +38,7 @@
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "请点击确定"
+      "desc": "需要获取您的位置来查看天气情况"
     }
   },
   "sitemapLocation": "sitemap.json"
