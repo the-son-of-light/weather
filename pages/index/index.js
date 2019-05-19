@@ -21,7 +21,8 @@ Page({
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function (options) {		
+	onLoad: function (options) {
+			
 		// 获取当前的地理位置
 		let that = this;
 		    // 新建bmap对象 
@@ -36,32 +37,27 @@ Page({
 			console.log(data);
 			//使用wxMarkerData获取数据
 			wxMarkerData = data.wxMarkerData;  
-			// 获取当前时间
-			let TIME = util.formatTime(new Date());
-			//把所有数据放在初始化data内
-			that.setData({ 
-				currentCity: data.originalData.result.addressComponent.district,
-				currentDate:TIME
-			}); 
-			console.log(that.data.currentCity)
+			// 获取要传的参数值
+			let location = data.originalData.result.addressComponent.district;
+			options.cityName == undefined ? location:location = options.cityName;
+			that.getCity(location);
 		} 
 		// 发起regeocoding检索请求 
 		BMap.regeocoding({ 
 			fail: fail, 
 			success: success
-		});     
-		setTimeout(()=>{
-			that.requestData();
-		},500)
+		});     	
 	},
-	// 请求数据
-	requestData(){
-		let _this = this;
-		console.log(_this.data)
-		api.getCityWeather('weather_mini?city='+_this.data.currentCity).then((res)=>{
-			console.log(res.data.data)
+	// 获取城市的天气情况
+	getCity(location){
+		let that = this;
+		api.getCityWeather('weather_mini?city='+location).then((res)=>{
 			let weather = res.data.data;
-			_this.setData({
+			// 获取当前时间
+			let TIME = util.formatTime(new Date());
+			that.setData({
+				currentDate:TIME,
+				currentCity:location,
 				nowTemperture:weather.wendu,
 				weather:weather.forecast[0].type,
 				low:weather.forecast[0].low,
@@ -69,17 +65,16 @@ Page({
 				weatherDes:weather.forecast,
 				prompt:weather.ganmao
 			})
-			console.log(_this.data.weatherDes)
-			for(let i in _this.data.weatherDes){
-				let subWeather = _this.data.weatherDes[i].date.substring(3,6);
-				let low = _this.data.weatherDes[i].low.substring(3,6);
-				let high = _this.data.weatherDes[i].high.substring(3,6);
-				let weathers = _this.data.weatherDes[i];
+			for(let i in that.data.weatherDes){
+				let subWeather = that.data.weatherDes[i].date.substring(3,6);
+				let low = that.data.weatherDes[i].low.substring(3,6);
+				let high = that.data.weatherDes[i].high.substring(3,6);
+				let weathers = that.data.weatherDes[i];
 				weathers.date=subWeather;
 				weathers.low=low;
 				weathers.high=high;
 			}
-			_this.setData({
+			that.setData({
 				weatherDes:weather.forecast
 			})
 		})

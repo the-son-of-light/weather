@@ -13,7 +13,7 @@
 		</view>
 	</view>
 	<view class="mod-weather">
-		<view class="weather">
+		<view class="nav-text">
 			<text>其余天气状况</text>
 		</view>
 		<view class="show-next-weather">
@@ -25,7 +25,7 @@
 		</view>
 	</view>
 	<view class="life-finger">
-		<view class="weather">
+		<view class="nav-text">
 			<text>温馨提示</text>
 		</view>
 		<view class="show-weather-list">
