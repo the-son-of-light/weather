@@ -73,10 +73,11 @@ Page({
 	//右侧索引列表点击
 	indexClick:function(e){
 		let index = e.currentTarget.dataset.index
-		console.log(e)
+		console.log(index)
 		this.setData({//定位到字母所在城市item
-			toView: index
-		  })
+		toView: index
+		})
+		console.log(this.data.toView)
 	},
 	// 开始触摸事件
 	touchStart:function(e){
@@ -96,6 +97,9 @@ Page({
 		let index = parseInt(touchEndy/rightHeight*21);
 		let value = this.data.searchNav[index];
 		console.log("touchEnd value:"+value)
+		this.setData({//定位到字母所在城市item
+			toView: index
+		})
 	},
 
 	/**
