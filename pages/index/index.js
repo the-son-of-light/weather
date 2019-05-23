@@ -14,6 +14,7 @@ Page({
 		weather:'',
 		low:'',
 		high:'',
+    weaImg:'yu',
 		weatherDes:[],
         hours:[],
         weatherFinger:[],
@@ -58,6 +59,10 @@ Page({
 			fail: fail, 
 			success: success
 		});     	
+
+
+
+    
 	},
 	// 获取城市当前的天气情况
 	getCity(location){
@@ -65,6 +70,10 @@ Page({
 		api.getCityWeather("api/?version=v1&city="+location).then((res)=>{
 			console.log(res.data)
 			let weather = res.data;
+      console.log(weather.data[0])
+
+      let weaImg = that.funWeaImg(weather.data[0].wea_img);
+
 			// // 获取当前时间
 			let TIME = util.formatTime(new Date());
 			that.setData({
@@ -75,18 +84,38 @@ Page({
 				hours:weather.data[0].hours,
 				low:weather.data[0].tem2,
 				high:weather.data[0].tem1,
-				weatherDes:res.data.data
-            })	
-            for(let i in that.data.fingerPic){
-                this.data.weatherDes[0].index[i].pic = that.data.fingerPic[i]
-            }
-            this.data.weatherDes[0].index[1].title = "运动指数"
-            that.setData({
-                weatherFinger:this.data.weatherDes[0].index
-            })
-            console.log(this.data.weatherFinger)
-        })
+				weatherDes:res.data.data,
+        weaImg
+      })	
+
+      for(let i in that.data.fingerPic){
+          this.data.weatherDes[0].index[i].pic = that.data.fingerPic[i]
+      }
+
+      this.data.weatherDes[0].index[1].title = "运动指数"
+      that.setData({
+          weatherFinger:this.data.weatherDes[0].index
+      })
+
+      console.log(this.data.weatherFinger)
+    })
+    
 	},
+  funWeaImg(wea){
+    
+    let x = wea;
+    switch (wea) {
+      case 'lei':
+        x = 'yu';
+        break;
+      case 'yin':
+        x='yun'
+        break;
+    }
+
+    return x;
+
+  },
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

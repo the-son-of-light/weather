@@ -1,4 +1,4 @@
-<view class="allBox"> 	
+<view class='allBox {{weaImg}}' style='background-image:url("/images/{{weaImg}}.png");background-repeat: no-repeat;'> 	
 	<view class="current">
 		<text>城市：{{currentCity}}</text>
 		<text>日期:{{currentDate}}</text>

@@ -1,13 +1,44 @@
 /**index.wxss**/
 
+.allBox{
+  padding-top: 30rpx;
+  background-size:100%;
+  padding-left: 10rpx;
+  padding-right: 10rpx;
+  box-sizing: border-box;
+  background-attachment:fixed;
+}
+/* 雨 */
+.allBox.yu{
+  color: #fff;
+}
+
+/* 晴 */
+.allBox.qing{
+  color: #343434;
+}
+
+/* 雪 */
+.allBox.xue .nav-text{
+  background:rgba(251,191,216,.7);
+}
+
+/* 云 */
+.allBox.yun{
+  color: #343434;
+}
+.allBox.yun .nav-text{
+  background:rgba(236,58,47,.7);
+}
 
 .current{
-    padding-left: 5rpx;
-    margin-top: 30rpx;
+    padding-left: 5rpx;    
     padding-bottom: 4rpx;
     border-bottom: 1rpx solid #fff;
 }
-
+.hour{
+  margin-bottom: 10rpx;
+}
 .nowWeather{
     width: 100%;
     height: 260rpx;
@@ -35,15 +66,14 @@
 }
 
 .weather-hour-box{
-    width: 1000rpx;
+    width: 1400rpx;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
 }
 
 .hours-weather{
-	width: 150rpx;
     font-size: 28rpx;
-    padding-right: 40rpx;
     display:flex;
     flex-direction: column;
     justify-content: center;
