@@ -1,2 +1,22 @@
 <!--pages/aboutMe/aboutMe.wxml-->
-<text>pages/aboutMe/aboutMe.wxml</text>
+<view class="allBox">
+    <view class="intr">
+        <text>产品名称：天气预报</text>
+        <text>数据来源：天气API</text>
+        <text>开发时间：2019年5月</text>
+    </view>
+    <view class="aboutMe">
+        <view class="nav-text intr-text">
+			<text>作者</text>
+        </view>
+        <text class="intr-text">the-son-of-light</text>
+        <view class="nav-text intr-text">
+			<text>邮箱</text>
+        </view>
+        <text class="intr-text">136844692@qq.com</text>
+        <view class="nav-text intr-text">
+			<text>GitHub</text>
+        </view>
+        <text class="intr-text">https://github.com/the-son-of-light</text>
+    </view>
+</view>

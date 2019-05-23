@@ -14,8 +14,17 @@ Page({
 		weather:'',
 		low:'',
 		high:'',
-		prompt:'',
-		weatherDes:[]
+		weatherDes:[],
+        hours:[],
+        weatherFinger:[],
+		fingerPic:[
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498306827&di=76d7eab41fd3165b21c3228894a44b26&imgtype=0&src=http%3A%2F%2Fwww.awing.cn%2Fuploadfiles%2Fpictures%2Fproduct%2F20170527093809_8922.png',
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498508344&di=48d131cad8e8da33324442d8164830a6&imgtype=0&src=http%3A%2F%2Fimgb.mumayi.com%2Fandroid%2Fimg_mumayi%2F2015%2F03%2F13%2F93%2F933011%2Ficon%2F933011_91684.png',
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498550791&di=b7d570597e924e6792433f2d8d7d967d&imgtype=0&src=http%3A%2F%2Fimg.aso.aizhan.com%2Ficon%2Fd2%2F37%2F17%2Fd237171a771587e9f3f8a323b3adde6c.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498755787&di=aa451ab2ec32e4f5e056e32b82175296&imgtype=0&src=http%3A%2F%2Fwebtv1.ccsobey.com%2Fhdgbdst%2Fupload%2FImage%2Fmrtp%2F2017%2F06%2F07%2F1_46ac153c17e646b98b7c4e07c6f06e10.jpg',
+			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498792789&di=0ae152d12b14a28ee5d7b02568da2af7&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F01%2F18%2F54%2F5905013815ee2_610.jpg',
+            'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558497244328&di=040fd79ef8daa2fc07e6bf81536e24ea&imgtype=0&src=http%3A%2F%2Fqstatic.zuimeia.com%2Fimg%2Ficons%2Fcld%2F2015120206592332856_350x350.jpeg'
+		]
 	},
   
 	/**
@@ -38,8 +47,10 @@ Page({
 			//使用wxMarkerData获取数据
 			wxMarkerData = data.wxMarkerData;  
 			// 获取要传的参数值
-			let location = data.originalData.result.addressComponent.district;
-			options.cityName == undefined ? location:location = options.cityName;
+			let location = data.originalData.result.addressComponent.district.substring(0,2);
+			console.log(location)
+            options.cityName == undefined ? location:location = options.cityName;
+            console.log(location)
 			that.getCity(location);
 		} 
 		// 发起regeocoding检索请求 
@@ -48,38 +59,34 @@ Page({
 			success: success
 		});     	
 	},
-	// 获取城市的天气情况
+	// 获取城市当前的天气情况
 	getCity(location){
 		let that = this;
-		api.getCityWeather('weather_mini?city='+location).then((res)=>{
-			let weather = res.data.data;
-			// 获取当前时间
+		api.getCityWeather("api/?version=v1&city="+location).then((res)=>{
+			console.log(res.data)
+			let weather = res.data;
+			// // 获取当前时间
 			let TIME = util.formatTime(new Date());
 			that.setData({
 				currentDate:TIME,
-				currentCity:location,
-				nowTemperture:weather.wendu,
-				weather:weather.forecast[0].type,
-				low:weather.forecast[0].low,
-				high:weather.forecast[0].high,
-				weatherDes:weather.forecast,
-				prompt:weather.ganmao
-			})
-			for(let i in that.data.weatherDes){
-				let subWeather = that.data.weatherDes[i].date.substring(3,6);
-				let low = that.data.weatherDes[i].low.substring(3,6);
-				let high = that.data.weatherDes[i].high.substring(3,6);
-				let weathers = that.data.weatherDes[i];
-				weathers.date=subWeather;
-				weathers.low=low;
-				weathers.high=high;
-			}
-			that.setData({
-				weatherDes:weather.forecast
-			})
-		})
+				currentCity:weather.city,
+				nowTemperture:weather.data[0].tem,
+				weather:weather.data[0].wea,
+				hours:weather.data[0].hours,
+				low:weather.data[0].tem2,
+				high:weather.data[0].tem1,
+				weatherDes:res.data.data
+            })	
+            for(let i in that.data.fingerPic){
+                this.data.weatherDes[0].index[i].pic = that.data.fingerPic[i]
+            }
+            this.data.weatherDes[0].index[1].title = "运动指数"
+            that.setData({
+                weatherFinger:this.data.weatherDes[0].index
+            })
+            console.log(this.data.weatherFinger)
+        })
 	},
-	
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

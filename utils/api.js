@@ -1,4 +1,4 @@
-let url = 'http://wthrcdn.etouch.cn';
+let url = 'https://www.tianqiapi.com';
 function api(cityName){
     return new Promise((resolve,reject)=>{
         wx.request({

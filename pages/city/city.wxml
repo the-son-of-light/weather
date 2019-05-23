@@ -1,30 +1,31 @@
 <!--pages/city/city.wxml-->
 <view class="cityBox">
+    <view class="search-city">
+        <input placeholder="请输入城市名称中文/拼音首字母" value="{{searchValue}}" bindinput="getCity" auto-focus />
+        <button plain="true" bindtap="chooseCity">确定</button>
+    </view>
     <view class="content">
-        <view class="search-city">
-            <input placeholder="请输入城市名称中文" value="{{searchValue}}" bindinput="getCity" auto-focus />
-            <button plain="true" bindtap="chooseCity">确定</button>
-        </view>
         <view class="all-city">
             <view class="city">全国</view>
-            <scroll-view class="city-scroll" scroll-y="true" scroll-width-animation="true" scroll-into-view="{{toView}}">
+            <scroll-view class="city-scroll" scroll-y="true" scroll-with-animation="true" scroll-into-view="{{toView}}">
                 <view class="city-list">
                     <!-- 循环城市列表 start -->
-                    <view  wx:for="{{cityList}}" wx:key="{{index}}" bindtap='selectcity' data-title="{{item.title}}">
+                    <view  wx:for="{{cityList}}" wx:key="{{index}}" id="{{'city'+index}}" bindtap='selectcity' data-title="{{item.title}}">
                         <view class="nav-text"> 
                             <text>{{item.title}}</text>
                         </view>               
-                        <view class="show-city" bindtap='indexClick'  data-index="{{item.title}}">
-                            <text wx:for="{{item.lists}}" wx:key="{{index}}" >{{item}}</text>
+                        <view class="show-city">
+                            <text wx:for="{{item.lists}}" wx:key="{{index}}"  data-city="{{item}}" bindtap="getCityValue">{{item}}</text>
                         </view>
                     </view>
                     <!-- 循环城市列表 end -->
                 </view>  
             </scroll-view>
         </view>
-    </view>
-    
-    <view class="search-nav"  bindtouchstart="touchStart" bindtouchmove="touchMove" bindtouchend="touchEnd" id="right">
-        <text wx:for="{{searchNav}}" wx:key="{{index}}">{{item}}</text>
+        <!-- 字母索引 start -->
+        <view class="search-nav" >
+            <text bindtap="cityScroll" data-index="{{index}}" wx:for="{{searchNav}}" wx:key="{{index}}">{{item}}</text>
+        </view>
+        <!-- 字母索引 end -->
     </view>
 </view>

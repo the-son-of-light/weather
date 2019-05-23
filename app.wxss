@@ -1,11 +1,13 @@
 /**app.wxss**/
 page { 
-    background-image:url('https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1557740254908&di=f5ba6d955380ef412af845ec1f4dfaa9&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20180804%2F34a4974f9e8646a98c34362d98b9e0f3.gif'); 
+    /* background-image:url('http://attachments.gfan.com/forum/201412/12/1516160g5b9v5obbx5mc9c.jpg');  */
+    /* background: #3FA7E6; */
     margin: 0px; 
     /*下面的是关键的设置100%显示*/ 
     background-size: 100% 100%; 
     background-attachment:fixed;
-  } 
+    /* color: #fff; */
+  }
 
 .nav-text{
   padding-left: 5rpx;

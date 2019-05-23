@@ -4,13 +4,22 @@
 		<text>日期:{{currentDate}}</text>
 	</view>
 	<view class="nowWeather">
-		<view class="now-temp">{{nowTemperture}}℃</view>
+		<view class="now-temp">{{nowTemperture}}</view>
 		<view class="temp-pic">
-			<!-- <image src="{{tempPic}}" /> -->
 			<text>{{weather}}</text>
-			<text>{{low}}</text>
-			<text>{{high}}</text>
+			<text>{{low}}~{{high}}</text>
 		</view>
+	</view>
+	<view class="hour">
+		<scroll-view scroll-x="true" scroll-with-animation="true">  
+			<view class="weather-hour-box"> 
+				<view class="hours-weather" wx:for="{{hours}}" wx:key="index">
+					<text >{{item.day}}</text>
+					<text >{{item.wea}}</text>
+					<text >{{item.tem}}</text>
+				</view>
+			</view>
+		</scroll-view>
 	</view>
 	<view class="mod-weather">
 		<view class="nav-text">
@@ -18,21 +27,25 @@
 		</view>
 		<view class="show-next-weather">
 			<view class="nextWeather" wx:for="{{weatherDes}}" wx:key="{{index}}">
-				<text>{{item.date}}</text>
-				<text>{{item.type}}</text>	
-				<text>{{item.low}}~{{item.high}}</text>
+				<text>{{item.week}}</text>
+				<text>{{item.wea}}</text>	
+				<text>{{item.tem2}}~{{item.tem1}}</text>
 			</view>
 		</view>
 	</view>
 	<view class="life-finger">
 		<view class="nav-text">
-			<text>温馨提示</text>
+			<text>生活指数</text>
 		</view>
 		<view class="show-weather-list">
-			<view class="finger-temp">
+			<view class="finger-temp" wx:for="{{weatherFinger}}" wx:key="index">
 				<view  class="finger-set" >
-					<text>{{prompt}}</text>
-				</view>
+					<image src="{{item.pic}}" />
+					<text>{{item.title}}</text>
+                </view>
+                <view class="finger-desc">
+                    <text>{{item.desc}}</text>
+                </view>
 			</view>
 		</view>
 	</view>

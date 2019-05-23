@@ -1,63 +1,103 @@
 /**index.wxss**/
 
+
 .current{
-  padding-left: 5rpx;
-  margin-top: 30rpx;
-  padding-bottom: 4rpx;
-  border-bottom: 1rpx solid #fff;
+    padding-left: 5rpx;
+    margin-top: 30rpx;
+    padding-bottom: 4rpx;
+    border-bottom: 1rpx solid #fff;
 }
 
 .nowWeather{
-  width: 100%;
-  height: 260rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 260rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
 }
 
 .now-temp{
-  font-size: 100rpx;
-  padding-right: 20rpx;
-  border-right: 1px solid #fff;
+    font-size: 100rpx;
+    padding-right: 20rpx;
+    border-right: 1px solid #fff;
 }
 
 .temp-pic{
-  display:flex;
-  flex-direction: column;
-  margin-left: 20rpx;
-  font-size: 32rpx;
+    display:flex;
+    flex-direction: column;
+    margin-left: 20rpx;
+    font-size: 32rpx;
+}
+
+.temp-pic text{
+    padding-top: 10rpx;
+}
+
+.weather-hour-box{
+    width: 1000rpx;
+    display: flex;
+    flex-direction: row;
+}
+
+.hours-weather{
+	width: 150rpx;
+    font-size: 28rpx;
+    padding-right: 40rpx;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.hours-weather text{
+    margin-top: 20rpx;
 }
 
 .current text{
-  font-size: 32rpx;
-  margin-right: 40rpx;
-  margin-top: 30rpx;
+    font-size: 32rpx;
+    margin-right: 40rpx;
+    margin-top: 30rpx;
 } 
 
 .finger-temp{
-  display: flex;
-  flex-direction: row;
-  border-bottom: 4rpx dotted #fff;
-  margin-top: 15rpx;
+    display: flex;
+    flex-direction: row;
+    margin-top: 15rpx;
+    border-bottom: 1px dotted #fff;
 }
 
 
 .finger-set{
-  padding-left: 5rpx;
-  margin-right: 20rpx;
-  padding-bottom: 4rpx;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 32rpx;
+    width: 120rpx;
+    padding-left: 5rpx;
+    margin-right: 20rpx;
+    padding-bottom: 4rpx;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    font-size: 32rpx;
 }
 
+.finger-set text{
+    font-size: 24rpx;
+}
+
+.finger-set image{
+    width: 100rpx;
+    height: 100rpx;
+    border-radius: 50rpx;
+}
+
+.finger-desc{
+    margin: auto 0;
+    font-size: 28rpx;
+}
 
 .nextWeather{
-  margin-top: 30rpx;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 0 5rpx 20rpx 5rpx;
+    font-size: 28rpx;
+    margin-top: 20rpx;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 0 5rpx 20rpx 5rpx;
 }
