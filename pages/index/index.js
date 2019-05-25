@@ -25,7 +25,13 @@ Page({
 			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498755787&di=aa451ab2ec32e4f5e056e32b82175296&imgtype=0&src=http%3A%2F%2Fwebtv1.ccsobey.com%2Fhdgbdst%2Fupload%2FImage%2Fmrtp%2F2017%2F06%2F07%2F1_46ac153c17e646b98b7c4e07c6f06e10.jpg',
 			'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558498792789&di=0ae152d12b14a28ee5d7b02568da2af7&imgtype=0&src=http%3A%2F%2Fpic.51yuansu.com%2Fpic3%2Fcover%2F01%2F18%2F54%2F5905013815ee2_610.jpg',
             'https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1558497244328&di=040fd79ef8daa2fc07e6bf81536e24ea&imgtype=0&src=http%3A%2F%2Fqstatic.zuimeia.com%2Fimg%2Ficons%2Fcld%2F2015120206592332856_350x350.jpeg'
-		]
+		],
+    weaObj:{
+      yun:'http://image.wanguobaoshi.com/7f036835d83bc19297f09ad4b1b105d5.png',
+      qing:'http://image.wanguobaoshi.com/45dd3f09e62d68f86c0800f0e2a30f52.png',
+      yu:'http://image.wanguobaoshi.com/6a0afd3a61110134f571ff8c164e3b96.png',
+      xue:'http://image.wanguobaoshi.com/3035d926c2441aded0d5f21d4d5a6d98.png'
+    }
 	},
   
 	/**
